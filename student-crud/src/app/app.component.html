@@ -1,0 +1,162 @@
+<div class=" h-12 bg-orange-400 border text-white flex text-xl pl-4 items-center">Student</div>
+    <form
+    #myForm = "ngForm"
+    [formGroup]="studentForm"
+    (ngSubmit)="onFormSubmit()"
+    class="text-xl grid grid-cols-1 lg:grid-cols-3 xl:grid-flow-col justify-center items-end gap-4 mt-4 border-2 p-8 border-purple-400">
+        <div class="grid">
+            <label>Student Name <span class="text-red-600">*</span></label>
+            <input 
+            formControlName="name"
+            class="p-1 border-2 w-auto border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+            type="text"
+            required
+            >
+        </div>
+        <div class="grid">
+            <label>Grade<span class="text-red-600">*</span></label>
+            <input
+            required
+            formControlName="grade"
+            class="p-1 border-2 border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500" type="text">
+        </div>
+        <div class="grid">
+            <label>Address</label>
+            <input
+            formControlName="address" 
+            class="p-1 border-2 border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500" type="text">
+        </div>
+        <div class="grid">
+            <label>Roll No</label>
+            <input
+            formControlName="rollno"
+            class="p-1 border-2 border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500" type="number">
+        </div>
+        <div class="grid">
+            <label>Active</label>
+            <select
+            formControlName="status" 
+            class="p-1 border-2 border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500" type="text">
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+            </select>
+        </div>
+        <div class="flex gap-4">
+            <button 
+                type="submit"
+                class="rounded-md w-20 h-10 bg-green-500 text-white p-[5px]">
+                Save
+            </button>
+            <button
+                type="button"
+                (click)="myForm.reset()"
+                class="rounded-md w-20 h-10 bg-red-500 text-white p-[5px]">
+                Reset
+            </button>
+        </div>
+</form>
+
+
+
+<div class="flex justify-center mt-4">
+    <table class=" border w-full">
+        <thead>
+          <tr class="bg-orange-400 border text-white h-12">
+            <th class="border">S.N</th>
+                <th class="border pl-4">Student Name</th>
+                <th class="border pl-4">Grade</th>
+                <th class="border pl-4">Address</th>
+                <th class="border pl-4">Roll No</th>
+                <th class="border pl-4">Active</th>
+                <th class="border pl-4">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border" *ngFor="let student of studentList; let i = index">
+            <td class="pl-4 border">{{i+1}}</td>
+            <td class="pl-4 border">{{student.name}}</td>
+            <td class="pl-4 border">{{student.grade}}</td>
+            <td class="pl-4 border">{{student.address}}</td>
+            <td class="pl-4 border">{{student.rollno}}</td>
+            <td class="pl-4 border">{{student.status}}</td>
+            <td class="flex gap-2 justify-center p-2">
+                <button 
+                class="text-white rounded-sm w-20 h-8 bg-green-500 p-[5px]"
+                (click)="edit(student)"
+                >Edit</button>
+                <button
+                (click)="deleteStudent(student.id)"
+                class="text-white rounded-sm w-20 h-8 bg-red-500 p-[5px]"
+                >Delete</button>
+            </td>
+          </tr>
+        </tbody>
+        </table>
+</div>
+
+  <div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+    <div class="relative w-auto my-6 mx-auto max-w-6xl">
+      <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+        <form
+        class="p-10 grid gap-4"
+        (ngSubmit)="updateStudent()"
+        >
+            <div class="grid">
+                <label>Student Name</label>
+                <input 
+                #name [(ngModel)]="studentsToUpdate.name" name="name"
+                class="p-1 border-2 w-auto border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+                type="text"
+                [required]="true">
+            </div>
+            <div class="grid">
+                <label>Grade</label>
+                <input 
+                #grade [(ngModel)]="studentsToUpdate.grade" name="grade"
+                class="p-1 border-2 border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+                type="text">
+            </div>
+            <div class="grid">
+                <label>Address</label>
+                <input
+                #address [(ngModel)]="studentsToUpdate.address" name="address"
+                class="p-1 border-2 border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+                type="text">
+            </div>
+            <div class="grid">
+                <label>Roll No</label>
+                <input
+                #rollno [(ngModel)]="studentsToUpdate.rollno" name="rollno"
+                class="p-1 border-2 border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+                type="number">
+            </div>
+            <div class="grid">
+                <label>Active</label>
+                <select
+                #status [(ngModel)]="studentsToUpdate.status" name="status"
+                class="p-1 border-2 border-slate-200 placeholder-slate-400 contrast-more:border-slate-400 contrast-more:placeholder-slate-500"
+                type="text">
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+            <div class="flex gap-4">
+                <button 
+                    type="submit"
+                    class="rounded-md w-20 h-10 bg-green-500 text-white p-[5px]"
+                    >
+                    Save
+                </button>
+                <button
+                    type="button"
+                    (click)="toggleModal()"
+                    class="rounded-md w-20 h-10 bg-red-500 text-white p-[5px]">
+                    Cancel
+                </button>
+            </div>
+    </form>
+      </div>
+    </div>
+  </div>
+
+  

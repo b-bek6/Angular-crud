@@ -1,0 +1,45 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "student": [
+    {
+      "name": "Bibek",
+      "grade": "CSIT 4th sem",
+      "address": "Kathmandu",
+      "rollno": 4,
+      "status": "active",
+      "id": 1
+    },
+    {
+      "name": "Hari",
+      "grade": "12",
+      "address": "Pokhara",
+      "rollno": 20,
+      "status": "inactive",
+      "id": 2
+    },
+    {
+      "name": "Reprehenderit mollit",
+      "grade": "Aliqua Ad dolor eni",
+      "address": "Ullamco esse dolore",
+      "rollno": 92,
+      "status": "inactive",
+      "id": 3
+    }
+  ]
+}
